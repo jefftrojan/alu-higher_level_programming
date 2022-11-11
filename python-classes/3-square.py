@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-class Square:
-    """ A class that defines a square by its size
+""" A class that defines a square by its size
     """
     
+class Square:
     
     
     def __init__(self, size=0):
