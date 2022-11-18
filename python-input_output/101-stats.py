@@ -28,7 +28,7 @@ class Magic:
 
     def print_info(self, sig=0, frame=0):
         """ print status code """
-        print("File size: {self.key}".format())
+        print("File size: {:d}".format(self.key))
         for key in sorted(self.dic.keys()):
             if self.dic[key] is not 0:
                 print("{}: {:d}".format(key, self.dic[key]))
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                 magic.print_info()
 
             try:
-                list_line = [x for x in line.split(" ") if x.strip()]
+                list_line = [x for x in line.split("") if x.strip()]
                 magic.add_status_code(list_line[-2])
                 magic.size += int(list_line[-1].strip("\n"))
             except:
