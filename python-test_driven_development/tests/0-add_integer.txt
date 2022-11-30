@@ -39,7 +39,7 @@ Checking float with int:
 
 Checking int with float:
 	 >>> add_integer(5, 7.8)
-	 12
+	 12.8
 
 Checking both float:
 	 >>> add_integer(2.45, 3.1)
