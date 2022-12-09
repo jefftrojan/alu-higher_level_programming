@@ -349,7 +349,7 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(r1.x, 3)
         self.assertEqual(r1.y, 4)
         
-     def test_save_to_file(self):
+    def test_save_to_file(self):
         
         """Test to save to file"""
         Base._Base__nb_objects = 0
