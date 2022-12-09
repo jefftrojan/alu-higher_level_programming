@@ -451,14 +451,13 @@ class TestSquareMethods(unittest.TestCase):
             self.assertEqual(file.read(), '[]')
             self.assertEqual(type(file.read()), str)
 
-        Square.save_to_file([Square(1, 2)])
+        Square.save_to_file([Square(1)])
         with open("Square.json") as file:
             self.assertEqual(file.read(),
-                             '[{"id": 1, "width": 1, '
-                             '"height": 2, "x": 0, "y": 0}]')
+                             '[{"id": 1, "size": 1, "x": 0, "y": 0}]')
 
     def test_save_to_file_empty(self):
-        """Test for the saving to a an empty file"""
+        """Test for saving to into an empty file"""
         Square.save_to_file([])
         self.assertTrue(os.path.isfile("Square.json"))
         with open("Square.json") as file:
