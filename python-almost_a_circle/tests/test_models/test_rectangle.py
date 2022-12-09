@@ -12,11 +12,11 @@ class TestRectangleMethods(unittest.TestCase):
     """ Suite to test Rectangle class """
 
     def setUp(self):
-        """ Method invoked for each test """
+        """ Method called for each test """
         Base._Base__nb_objects = 0
 
     def test_new_rectangle(self):
-        """ Test new rectangle """
+        """ Test all new rectangle """
         new = Rectangle(1, 1)
         self.assertEqual(new.width, 1)
         self.assertEqual(new.height, 1)
@@ -25,7 +25,7 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(new.id, 1)
 
     def test_new_rectangle_2(self):
-        """ Test new rectangle with all attrs """
+        """ Test a new rectangle with all attributes """
         new = Rectangle(2, 3, 5, 5, 4)
         self.assertEqual(new.width, 2)
         self.assertEqual(new.height, 3)
@@ -261,7 +261,7 @@ class TestRectangleMethods(unittest.TestCase):
             self.assertEqual(str_out.getvalue(), res)
 
     def test_to_dictionary_2(self):
-        """ Test dictionary returned """
+        """ Test for dictionary returned """
         r1 = Rectangle(2, 2, 2, 2)
         res = "[Rectangle] (1) 2/2 - 2/2\n"
         with patch('sys.stdout', new=StringIO()) as str_out:
@@ -289,7 +289,7 @@ class TestRectangleMethods(unittest.TestCase):
             self.assertEqual(str_out.getvalue(), res)
 
     def test_dict_to_json(self):
-        """ Test Dictionary to JSON string """
+        """ Test for Dictionary to JSON string """
         r1 = Rectangle(2, 2)
         dictionary = r1.to_dictionary()
         json_dictionary = Base.to_json_string([dictionary])
@@ -300,30 +300,30 @@ class TestRectangleMethods(unittest.TestCase):
             self.assertEqual(str_out.getvalue(), res.replace("'", "\""))
 
     def test_check_value(self):
-        """ Test args passed """
+        """ Test args passed! """
         with self.assertRaises(ValueError):
             r1 = Rectangle(-1, 2)
 
     def test_check_value_2(self):
-        """ Test args passed """
+        """ Test args passed! """
         with self.assertRaises(ValueError):
             r1 = Rectangle(1, -2)
 
     def test_create(self):
-        """ Test create method """
+        """ Test for create method """
         dictionary = {'id': 89}
         r1 = Rectangle.create(**dictionary)
         self.assertEqual(r1.id, 89)
 
     def test_create_2(self):
-        """ Test create method """
+        """ Test for create method """
         dictionary = {'id': 89, 'width': 1}
         r1 = Rectangle.create(**dictionary)
         self.assertEqual(r1.id, 89)
         self.assertEqual(r1.width, 1)
 
     def test_create_3(self):
-        """ Test create method """
+        """ Test for create method """
         dictionary = {'id': 89, 'width': 1, 'height': 2}
         r1 = Rectangle.create(**dictionary)
         self.assertEqual(r1.id, 89)
@@ -331,7 +331,7 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(r1.height, 2)
 
     def test_create_4(self):
-        """ Test create method """
+        """ Test for create method """
         dictionary = {'id': 89, 'width': 1, 'height': 2, 'x': 3}
         r1 = Rectangle.create(**dictionary)
         self.assertEqual(r1.id, 89)
@@ -340,7 +340,7 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(r1.x, 3)
 
     def test_create_5(self):
-        """ Test create method """
+        """ Test for create method """
         dictionary = {'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4}
         r1 = Rectangle.create(**dictionary)
         self.assertEqual(r1.id, 89)
@@ -348,6 +348,34 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(r1.height, 2)
         self.assertEqual(r1.x, 3)
         self.assertEqual(r1.y, 4)
+        
+     def test_save_to_file(self):
+        """Test to save to file"""
+        Base._Base__nb_objects = 0
+
+        Rectangle.save_to_file(None)
+        self.assertTrue(os.path.isfile("Rectangle.json"))
+        with open("Rectangle.json") as file:
+            self.assertEqual(file.read(), '[]')
+
+        Rectangle.save_to_file([])
+        with open("Rectangle.json") as file:
+            self.assertEqual(file.read(), '[]')
+            self.assertEqual(type(file.read()), str)
+
+        Rectangle.save_to_file([Rectangle(1, 2)])
+        with open("Rectangle.json") as file:
+            self.assertEqual(file.read(),
+                             '[{"id": 1, "width": 1, '
+                             '"height": 2, "x": 0, "y": 0}]')
+
+    def test_save_to_file_empty(self):
+        """Test for the saving to a an empty file"""
+        Rectangle.save_to_file([])
+        self.assertTrue(os.path.isfile("Rectangle.json"))
+        with open("Rectangle.json") as file:
+            self.assertEqual(file.read(), "[]")
+            self.assertEqual(type(file.read()), str)
 
     def test_load_from_file(self):
         """ Test load JSON file """
