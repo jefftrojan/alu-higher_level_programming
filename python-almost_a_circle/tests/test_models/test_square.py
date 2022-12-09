@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Module for test Square class """
 import unittest
+import os
 from io import StringIO
 from unittest import TestCase
 from unittest.mock import patch
@@ -435,9 +436,37 @@ class TestSquareMethods(unittest.TestCase):
         self.assertEqual(s1.size, 1)
         self.assertEqual(s1.x, 2)
         self.assertEqual(s1.y, 3)
+    def test_save_to_file(self):
+        
+        """Test to save to file"""
+        Base._Base__nb_objects = 0
 
+        Square.save_to_file(None)
+        self.assertTrue(os.path.isfile("Square.json"))
+        with open("Square.json") as file:
+            self.assertEqual(file.read(), '[]')
+
+        Square.save_to_file([])
+        with open("Square.json") as file:
+            self.assertEqual(file.read(), '[]')
+            self.assertEqual(type(file.read()), str)
+
+        Square.save_to_file([Square(1, 2)])
+        with open("Square.json") as file:
+            self.assertEqual(file.read(),
+                             '[{"id": 1, "width": 1, '
+                             '"height": 2, "x": 0, "y": 0}]')
+
+    def test_save_to_file_empty(self):
+        """Test for the saving to a an empty file"""
+        Square.save_to_file([])
+        self.assertTrue(os.path.isfile("Square.json"))
+        with open("Square.json") as file:
+            self.assertEqual(file.read(), "[]")
+            self.assertEqual(type(file.read()), str)
     def test_load_from_file_2(self):
-        """ Test load JSON file """
+        
+        """ Test to load JSON file """
         s1 = Square(5)
         s2 = Square(8, 2, 5)
 
