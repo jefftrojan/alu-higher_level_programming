@@ -2,6 +2,7 @@
 """
 Creates the State "California" with the City "San Francisco" from a DB
 """
+
 import sys
 from relationship_state import Base, State
 from relationship_city import City
