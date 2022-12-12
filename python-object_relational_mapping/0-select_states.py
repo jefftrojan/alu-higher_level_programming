@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
     Program to list all states from a database hbtn_0e_0_usa
-    using sql 
+    using sql
 """
 
 import sys
