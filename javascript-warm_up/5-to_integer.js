@@ -4,7 +4,7 @@ const arg = process.argv.slice(2);
 const Numcheck = Number.isInteger(arg);
 
 if (Numcheck === true) {
-  console.log("My number:" + arg[0]);
+  console.log(`My number: ${arg}`);
 } else {
-  console.log("Not a number");
+  console.log('Not a number');
 }
