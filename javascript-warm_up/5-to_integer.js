@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const arg = process.argv.slice(2);
+const arg = process.argv[2];
 const Numcheck = Number.isInteger(arg);
 
 if (!Numcheck === true) {
