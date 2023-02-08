@@ -1,8 +1,7 @@
 #!/usr/bin/node
-const repeat = (x, theFunction) => {
-  for (let i = 0; i < x; i++) {
-    theFunction();
+exports.repeat = function (x, theFunction) {
+  while (x > 0) {
+    theFunction.call();
+    x--;
   }
 };
-
-module.exports = repeat;
