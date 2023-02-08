@@ -1,7 +1,7 @@
-#!/usr/bin/node
-exports.repeat = function (x, theFunction) {
-  while (x > 0) {
-    theFunction.call();
-    x--;
+const callMeMoby = (x, theFunction) => {
+  for (let i = 0; i < x; i++) {
+    theFunction();
   }
 };
+
+module.exports = callMeMoby;
