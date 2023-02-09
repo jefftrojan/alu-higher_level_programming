@@ -1,4 +1,2 @@
 #!/usr/bin/node
-class Rectangle {
-
-}
+let Rectangle = class Rectangle {}
