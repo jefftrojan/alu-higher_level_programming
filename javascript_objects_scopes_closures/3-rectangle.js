@@ -1,7 +1,5 @@
 #!/usr/bin/node
 
-const Rectangle = require('./1-rectangle');
-
 module.exports = class Rectangle {
   constructor (w, h) {
     if (w > 0 && h > 0) {
